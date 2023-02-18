@@ -1,9 +1,4 @@
-/*-----------------------------------------------
- * Author:
- * Date:
- * Description:
- ----------------------------------------------*/
-
+// Copyright 2021, Aline Normoyle, alinen
 
 #ifndef AGL_IMAGE_H_
 #define AGL_IMAGE_H_
@@ -28,7 +23,7 @@ struct Pixel {
  */
 class Image {
  public:
-  Image();
+  Image();//is this the constructor? do we put the general constructor like Image(float x)
   Image(int width, int height);
   Image(const Image& orig);
   Image& operator=(const Image& orig);
@@ -120,8 +115,6 @@ class Image {
   // flip around the vertical midline
   Image flipVertical() const;
 
-  // rotate the Image 90 degrees
-  Image rotate90() const;
 
   // Return a sub-Image having the given top,left coordinate and (width, height)
   Image subimage(int x, int y, int w, int h) const;
@@ -129,7 +122,6 @@ class Image {
   // Replace the portion starting at (row, col) with the given image
   // Clamps the image if it doesn't fit on this image
   void replace(const Image& image, int x, int y);
-
   // swirl the colors 
   Image swirl() const;
 
@@ -184,17 +176,33 @@ class Image {
   // Convert the image to grayscale
   Image grayscale() const;
 
-  // return a bitmap version of this image
+  // retursn a bitmap version of this image
   Image colorJitter(int size) const;
 
   // return a bitmap version of this image
   Image bitmap(int size) const;
 
+  Image brr() const;
+
+  Image glitch()const;
+
+  Image glow()const;
+
+  Image crank90()const;
+
+  Image deepfry(const Image& other)const;
+  
   // Fill this image with a color
   void fill(const Pixel& c);
 
  private:
    // todo
+   Pixel** t=NULL;
+   Pixel* dad=NULL;
+   Pixel* img=NULL;
+   int wt=0;
+   int ht=0;
+   int chan=3;
 };
 }  // namespace agl
 #endif  // AGL_IMAGE_H_

@@ -14,9 +14,17 @@
 namespace agl
 {
    enum PrimitiveType {UNDEFINED, LINES, TRIANGLES};
+   struct dad{
+      Pixel rgb;
+      int x,y;
+      //unsigned char r;
+      //unsigned char g;
+      //unsigned char b;
+   };
    class Canvas
    {
    public:
+   
       Canvas(int w, int h);
       virtual ~Canvas();
 
@@ -43,11 +51,24 @@ namespace agl
       // Specify a color. Color components are in range [0,255]
       void color(unsigned char r, unsigned char g, unsigned char b);
 
+      void slope(dad p1,dad p2);
+
+      void line(dad p1,dad p2);
+
+      void triangle(dad p1,dad p2,dad p3);
+
+      float mth(dad v2,dad v1,dad v3);
+
       // Fill the canvas with the given background color
       void background(unsigned char r, unsigned char g, unsigned char b);
 
    private:
       Image _canvas;
+      int check;
+      std::vector<dad> dada;
+      dad buff;//buffer variable
+      Pixel bround,rgb,tmp;
+
    };
 }
 
