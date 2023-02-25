@@ -1,4 +1,3 @@
-// Copyright 2021, Aline Normoyle, alinen
 
 #ifndef AGL_IMAGE_H_
 #define AGL_IMAGE_H_
@@ -19,12 +18,12 @@ struct Pixel {
 };
 
 /**
- * @brief Implements loading, modifying, and saving RGB images
+ * @brief Implements loading,modifying,and saving RGB images
  */
 class Image {
  public:
-  Image();//is this the constructor? do we put the general constructor like Image(float x)
-  Image(int width, int height);
+  Image();
+  Image(int width,int height);
   Image(const Image& orig);
   Image& operator=(const Image& orig);
 
@@ -32,19 +31,19 @@ class Image {
 
   /** 
    * @brief Load the given filename 
-   * @param filename The file to load, relative to the running directory
+   * @param filename The file to load,relative to the running directory
    * @param flip Whether the file should flipped vertally when loaded
    * 
    * @verbinclude sprites.cpp
    */
-  bool load(const std::string& filename, bool flip = false);
+  bool load(const std::string& filename,bool flip=false);
 
   /** 
    * @brief Save the image to the given filename (.png)
-   * @param filename The file to load, relative to the running directory
+   * @param filename The file to load,relative to the running directory
    * @param flip Whether the file should flipped vertally before being saved
    */
-  bool save(const std::string& filename, bool flip = true) const;
+  bool save(const std::string& filename,bool flip=true) const;
 
   /** @brief Return the image width in pixels
    */
@@ -69,31 +68,31 @@ class Image {
    * This call will replace the old data with the new data. Data should 
    * match the size width * height * 3
    */
-  void set(int width, int height, unsigned char* data);
+  void set(int width,int height,unsigned char* data);
 
   /**
-   * @brief Get the pixel at index (row, col)
+   * @brief Get the pixel at index (row,col)
    * @param row The row (value between 0 and height)
    * @param col The col (value between 0 and width)
    *
-   * Pixel colors are unsigned char, e.g. in range 0 to 255
+   * Pixel colors are unsigned char,e.g. in range 0 to 255
    */ 
-  Pixel get(int row, int col) const;
+  Pixel get(int row,int col) const;
 
   /**
-   * @brief Set the pixel RGBA color at index (row, col)
+   * @brief Set the pixel RGBA color at index (row,col)
    * @param row The row (value between 0 and height)
    * @param col The col (value between 0 and width)
    *
-   * Pixel colors are unsigned char, e.g. in range 0 to 255
+   * Pixel colors are unsigned char,e.g. in range 0 to 255
    */ 
-  void set(int row, int col, const Pixel& color);
+  void set(int row,int col,const Pixel& color);
 
   /**
  * @brief Set the pixel RGB color at index i
  * @param i The index (value between 0 and width * height)
  *
- * Pixel colors are unsigned char, e.g. in range 0 to 255
+ * Pixel colors are unsigned char,e.g. in range 0 to 255
  */
   Pixel get(int i) const;
 
@@ -101,13 +100,13 @@ class Image {
  * @brief Set the pixel RGB color at index i
  * @param i The index (value between 0 and width * height)
  *
- * Pixel colors are unsigned char, e.g. in range 0 to 255
+ * Pixel colors are unsigned char,e.g. in range 0 to 255
  */
-  void set(int i, const Pixel& c);
+  void set(int i,const Pixel& c);
 
 
   // resize the image
-  Image resize(int width, int height) const;
+  Image resize(int width,int height) const;
 
   // flip around the horizontal midline
   Image flipHorizontal() const;
@@ -115,49 +114,58 @@ class Image {
   // flip around the vertical midline
   Image flipVertical() const;
 
+  // rotate the Image 90 degrees
+  Image crank90() const;
 
-  // Return a sub-Image having the given top,left coordinate and (width, height)
-  Image subimage(int x, int y, int w, int h) const;
+  Image blur() const;
 
-  // Replace the portion starting at (row, col) with the given image
+  Image extract() const;
+
+  Image border() const;
+
+  // Return a sub-Image having the given top,left coordinate and (width,height)
+  Image subimage(int x,int y,int w,int h) const;
+
+  // Replace the portion starting at (row,col) with the given image
   // Clamps the image if it doesn't fit on this image
-  void replace(const Image& image, int x, int y);
+  void replace(const Image& image,int x,int y);
+
   // swirl the colors 
   Image swirl() const;
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    result.pixel = this.pixel + other.pixel
+  //    result.pixel=this.pixel + other.pixel
   // Assumes that the two images are the same size
   Image add(const Image& other) const;
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    result.pixel = this.pixel - other.pixel
+  //    result.pixel=this.pixel - other.pixel
   // Assumes that the two images are the same size
   Image subtract(const Image& other) const;
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    result.pixel = this.pixel * other.pixel
+  //    result.pixel=this.pixel * other.pixel
   // Assumes that the two images are the same size
   Image multiply(const Image& other) const;
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    result.pixel = abs(this.pixel - other.pixel)
+  //    result.pixel=abs(this.pixel - other.pixel)
   // Assumes that the two images are the same size
   Image difference(const Image& other) const;
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    result.pixel = max(this.pixel, other.pixel)
+  //    result.pixel=max(this.pixel,other.pixel)
   // Assumes that the two images are the same size
   Image lightest(const Image& other) const;
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    result.pixel = min(this.pixel, other.pixel)
+  //    result.pixel=min(this.pixel,other.pixel)
   // Assumes that the two images are the same size
   Image darkest(const Image& other) const;
 
@@ -166,9 +174,9 @@ class Image {
 
   // Apply the following calculation to the pixels in 
   // our image and the given image:
-  //    this.pixels = this.pixels * (1-alpha) + other.pixel * alpha
+  //    this.pixels=this.pixels * (1-alpha) + other.pixel * alpha
   // Assumes that the two images are the same size
-  Image alphaBlend(const Image& other, float amount) const;
+  Image alphaBlend(const Image& other,float amount) const;
 
   // Convert the image to grayscale
   Image invert() const;
@@ -176,33 +184,19 @@ class Image {
   // Convert the image to grayscale
   Image grayscale() const;
 
-  // retursn a bitmap version of this image
+  // return a bitmap version of this image
   Image colorJitter(int size) const;
 
   // return a bitmap version of this image
   Image bitmap(int size) const;
 
-  Image brr() const;
-
-  Image glitch()const;
-
-  Image glow()const;
-
-  Image crank90()const;
-
-  Image deepfry(const Image& other)const;
-  
   // Fill this image with a color
   void fill(const Pixel& c);
 
  private:
    // todo
-   Pixel** t=NULL;
+   int wt,ht,chan;
    Pixel* dad=NULL;
-   Pixel* img=NULL;
-   int wt=0;
-   int ht=0;
-   int chan=3;
 };
 }  // namespace agl
 #endif  // AGL_IMAGE_H_
