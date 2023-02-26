@@ -106,6 +106,7 @@ void Canvas::background(unsigned char r,unsigned char g,unsigned char b)
    _canvas.fill(bround);//fills the canvas with specified color/makes background
 }
 void Canvas::point(dad p1){
+   _canvas.fill(bround);
    buff.x=p1.x;
    buff.y=p1.y;
    p1.rgb=buff.rgb;
@@ -116,6 +117,7 @@ void Canvas::scaleline(float s, dad p){
    p.y=p.y*s;
 }
 void Canvas::line(dad p1,dad p2){
+   _canvas.fill(bround);
    printf("drawing line\n");
    scaleline(1,p2);
    int w=p2.x-p1.x;
@@ -178,6 +180,7 @@ float Canvas::mth(dad v1,dad v2,dad v3){//see week 4/5 slides
    return (((float)((v2.y-v3.y)*v1.x)+(float)((v3.x-v2.x)*v1.y)+(float)(v2.x*v3.y)-(float)(v3.x* v2.y)));
 }
 void Canvas::triangle(dad p1,dad p2,dad p3){
+   _canvas.fill(bround);
    printf("drawing triangle\n");
    int mx=max(max(p1.x,p2.x),p3.x);
    int my=max(max(p1.y,p2.y),p3.y);
@@ -198,6 +201,7 @@ void Canvas::triangle(dad p1,dad p2,dad p3){
    dada.clear();
 }
 void Canvas::star(int x,int y,int r){
+   _canvas.fill(bround);
    begin(TRIANGLES);
    vertex(x-(r/2),y);
    vertex(x+(r/2),y);
