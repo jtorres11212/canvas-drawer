@@ -1,8 +1,9 @@
 # canvas-drawer
 
 Implements a simple drawing api
+![line-color-interpolation](https://user-images.githubusercontent.com/94137311/221465562-19da9534-b060-4342-8908-2b1ee78cb6b2.png)
 
-TODO: Add a representative image for your project here
+##Heres what I got for now
 
 ## How to build
 
