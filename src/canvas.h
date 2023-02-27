@@ -64,6 +64,11 @@ namespace agl
 
       void mirror(int ang);//rotates 
 
+      void nslope(dad p1,dad p2);
+
+      void pslope(dad p1,dad p2);
+      
+      void rectangle(int x,int y,int w,int h);
       // Fill the canvas with the given background color
       void background(unsigned char r, unsigned char g, unsigned char b);
 
@@ -72,7 +77,7 @@ namespace agl
       int check;
       std::vector<dad> dada;
       dad buff;//buffer variable
-      Pixel bround;
+      Pixel bround,current;
       int wt,ht;
    };
 }
